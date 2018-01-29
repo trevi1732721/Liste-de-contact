@@ -93,6 +93,7 @@ public class main {
             case 2:
                 break;
             case 3:
+                System.out.print("\n");
                 break;
             case 4:
                 break;
