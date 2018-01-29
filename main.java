@@ -7,7 +7,7 @@ public class main {
     public static void main(String[] args) {
 
         Contact[] liste = new Contact[20];
-        boolean choix = true, found = false;
+        boolean choix = true, found = false, choix2 = true;
         int selection = 0;
 
         Scanner sc = new Scanner(System.in);
@@ -27,12 +27,12 @@ public class main {
 
                     }
                 }
-                System.out.print("Nouveau contact");
+                System.out.print("Nouveau contact\n");
                 System.out.print("  Quel est le prenom du contact?");
                 liste[i].setPrenom(sc.next());
                 System.out.print("  Quel est le nom de famille du contact?");
                 liste[i].setNom(sc.next());
-                System.out.print("Adresse");
+                System.out.print("Adresse\n");
                 System.out.print("  Quel est le numero civic du contact?");
                 liste[i].adresse.setNumCivique(sc.nextInt());
                 System.out.print("  Quel est le nom de rue du contact?");
@@ -47,8 +47,7 @@ public class main {
                 liste[i].adresse.setPays(sc.next());
                 System.out.print("  Quel est l'emplois du contact?");
                 liste[i].occupation.setPoste(sc.next());
-                System.out.print("L'entreprise");
-                liste[i].occupation.entreprise.setNom(sc.next());
+                System.out.print("L'entreprise\n");
                 System.out.print("  Quel est le nom de l'entreprise?");
                 liste[i].occupation.entreprise.setNom(sc.next());
                 System.out.print("  Quel est le numero civic de l'entreprise");
@@ -63,8 +62,8 @@ public class main {
                 liste[i].occupation.entreprise.adresseEntreprise.setProvince(sc.next());
                 System.out.print("  Quel est le pays de l'entreprise?");
                 liste[i].occupation.entreprise.adresseEntreprise.setPays(sc.next());
-                System.out.print("Téléphone");
-                System.out.print("voulez vous entré un nouméro de telephone?\n1- oui\n2- non");
+                System.out.print("Téléphone\n");
+                System.out.print("Voulez vous entrer un numero de telephone?\n1- oui\n2- non");
                 selection = sc.nextInt();
                 if(selection == 1){
                     choix = true;
@@ -75,13 +74,21 @@ public class main {
                     liste[i].numeroTelephone[j].setInformation(sc.next());
                     System.out.println("  Quel est le numero de téléphone du contact?");
                     liste[i].numeroTelephone[j].setNumero(sc.next());
-                    System.out.println("voulez vbous mettre un autre numéro?\n1- oui\n2- non");
+                    choix2=true;
+                    while(choix2){
+                        choix2 = false;
+                    System.out.println("voulez vous mettre un autre numéro?\n1- oui\n2- non");
                     selection = sc.nextInt();
                     j++;
                     if(selection == 2){
                         choix = false;
+                    }else if(selection != 1){
+                        System.out.print("votre choix est invalide!");
+                        choix2 = true;
                     }
                     }
+                }
+                choix=true;
                 break;
             case 2:
                 break;

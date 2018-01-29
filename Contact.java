@@ -7,6 +7,12 @@ public class Contact {
     Adresse adresse = new Adresse();
     Occupation occupation = new Occupation();
     Telephone[] numeroTelephone = new Telephone[10];
+    public Contact(){
+        for(int i=0;i<10;i++){
+            numeroTelephone[i] = new Telephone();
+        }
+    }
+
 
     public String getPrenom() {
         return prenom;
