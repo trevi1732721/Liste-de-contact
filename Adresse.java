@@ -2,14 +2,13 @@
  * Created by TreVi1732721 on 2018-01-22.
  */
 public class Adresse {
-    int numCivique;
-    String rue, appartement, ville, province, pays;
+    String rue, appartement, ville, province, pays,numCivique;
 
-    public int getNumCivique() {
+    public String getNumCivique() {
         return numCivique;
     }
 
-    public void setNumCivique(int numCivique) {
+    public void setNumCivique(String numCivique) {
         this.numCivique = numCivique;
     }
 

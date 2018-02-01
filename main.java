@@ -13,13 +13,12 @@ public class main {
 
         Scanner sc = new Scanner(System.in);
         while(choix){
-            choix = false;
             System.out.println("Que voulez vous faire?\n1- créer un contact\n2- modifier un contact\n3- afficher un contact\n4- quitter");
             selection = sc.nextInt();
             switch(selection){
                 case 1:
                     int i=-1;
-
+                    found=false;
                     while(!found && i<=19){
                         i++;
                         if(liste[i]== null){
@@ -35,7 +34,7 @@ public class main {
                     liste[i].setNom(sc.next());
                     System.out.print("Adresse\n");
                     System.out.print("  Quel est le numero civic du contact?");
-                    liste[i].adresse.setNumCivique(sc.nextInt());
+                    liste[i].adresse.setNumCivique(sc.next());
                     System.out.print("  Quel est le nom de rue du contact?");
                     liste[i].adresse.setRue(sc.next());
                     System.out.print("  Quel est l'appartement du contact?(Écrire NA si ça ne s'applique pas)");
@@ -52,7 +51,7 @@ public class main {
                     System.out.print("  Quel est le nom de l'entreprise?");
                     liste[i].occupation.entreprise.setNom(sc.next());
                     System.out.print("  Quel est le numero civic de l'entreprise");
-                    liste[i].occupation.entreprise.adresseEntreprise.setNumCivique(sc.nextInt());
+                    liste[i].occupation.entreprise.adresseEntreprise.setNumCivique(sc.next());
                     System.out.print("  Quel est le nom de rue de l'entreprise?");
                     liste[i].occupation.entreprise.adresseEntreprise.setRue(sc.next());
                     System.out.print("  Quel est l'appartement de l'entreprise?(Écrire NA si ça ne s'applique pas)");
@@ -69,8 +68,9 @@ public class main {
                     if(selection == 1){
                         choix = true;
                     }
+                    int j=0;
                     while(choix){
-                        int j=0;
+
                         System.out.println("  Quel est le type de numero de téléphone du contact?(maison, travail, cellulaire, ...)");
                         liste[i].numeroTelephone[j].setInformation(sc.next());
                         System.out.println("  Quel est le numero de téléphone du contact?");
@@ -108,10 +108,10 @@ public class main {
                             liste[selection].setNom(modification);
                         }
                         System.out.print("Adresse\n");
-                        System.out.print("  Numero civic du contact[" + liste[selection].adresse.getNumCivique() + "]:\n");
-                        modification2 = sc.nextInt();
+                            System.out.print("  Numero civic du contact[" + liste[selection].adresse.getNumCivique() + "]:\n");
+                            modification = sc.next();
                         if (modification.toUpperCase() != "NA") {
-                            liste[selection].adresse.setNumCivique(modification2);
+                            liste[selection].adresse.setNumCivique(modification);
                         }
                         System.out.print("  Nom de rue du contact[" + liste[selection].adresse.getRue() + "]:\n");
                         modification = sc.next();
@@ -152,7 +152,7 @@ public class main {
                         System.out.print("  Numero civic de l'entreprise[" + liste[selection].occupation.entreprise.adresseEntreprise.getNumCivique() + "]:\n");
                         modification2 = sc.nextInt();
                         if (modification.toUpperCase() != "NA") {
-                            liste[selection].occupation.entreprise.adresseEntreprise.setNumCivique(modification2);
+                            liste[selection].occupation.entreprise.adresseEntreprise.setNumCivique(modification);
                         }
                         System.out.print("  Nom de rue de l'entreprise[" + liste[selection].occupation.entreprise.adresseEntreprise.getRue() + "]:\n");
                         modification = sc.next();
@@ -179,6 +179,41 @@ public class main {
                         if (modification.toUpperCase() != "NA") {
                             liste[selection].occupation.entreprise.adresseEntreprise.setPays(modification);
                         }
+                        for(j=0;j<10;j++){
+                            if(liste[selection] != null){
+                                System.out.print("Numero de télephone [ "+ (j+1)+ liste[selection].numeroTelephone[j].getNumero()+" ]:");
+                                modification = sc.next();
+                                if (modification.toUpperCase() != "NA") {
+                                    liste[selection].numeroTelephone[j].setNumero(modification);
+                                }
+                            }
+                        }
+                        choix2=true;
+                        while(choix2){
+                        System.out.print("Voulez vous entrer un nouveau numero de telephone?\n1- oui\n2- non");
+                        modification2 = sc.nextInt();
+                        if(modification2==2){
+                            choix2 = false;
+                        }
+                        else if(modification2==1){
+                        found= false;
+                        i=-1;
+                        while(!found && i<=9){
+                            i++;
+                            if(liste[selection].numeroTelephone[i].getNumero() == null){
+                                found = true;
+                            }
+                        }
+                        System.out.println("  Quel est le type de numero de téléphone du contact?(maison, travail, cellulaire, ...)");
+                        liste[selection].numeroTelephone[i].setInformation(sc.next());
+                        System.out.println("  Quel est le numero de téléphone du contact?");
+                        liste[selection].numeroTelephone[i].setNumero(sc.next());
+                        }
+                        else{
+                            System.out.print("choix invalide");
+                        }
+
+                    }
                     }
                     else{
                         System.out.print("Vous n'avez pas encore créé de contact...\n\n");
@@ -186,11 +221,39 @@ public class main {
                     choix=true;
                     break;
                 case 3:
-                    System.out.print("\n");
+                    for( i=0;i<19;i++ ) {
+                        if (liste[i] != null) {
+                            System.out.print("\n");
+                            System.out.print("Contact numero " + (i + 1) + System.lineSeparator());
+                            System.out.print("  Prenom du contact: " + liste[i].getPrenom());
+                            System.out.print("  Nom de famille du contact: " + liste[i].getNom());
+                            System.out.print("Adresse\n");
+                            System.out.print("  Numero civic du contact: " + liste[i].adresse.getNumCivique());
+                            System.out.print("  Nom de rue du contact: " + liste[i].adresse.getRue());
+                            System.out.print("  Appartement du contact: " + liste[i].adresse.getAppartement());
+                            System.out.print("  Ville du contact: " + liste[i].adresse.getVille());
+                            System.out.print("  Province du contact: " + liste[i].adresse.getProvince());
+                            System.out.print("  Pays du contact: " + liste[i].adresse.getPays());
+                            System.out.print("  Emplois du contact: " + liste[i].occupation.getPoste());
+                            System.out.print("L'entreprise\n");
+                            System.out.print("  Nom de l'entreprise: " + liste[i].occupation.entreprise.getNom());
+                            System.out.print("  Numero civic de l'entreprise: " + liste[i].occupation.entreprise.adresseEntreprise.getNumCivique());
+                            System.out.print("  Nom de rue de l'entreprise: " + liste[i].occupation.entreprise.adresseEntreprise.getRue());
+                            System.out.print("  Appartement de l'entreprise: " + liste[i].occupation.entreprise.adresseEntreprise.getAppartement());
+                            System.out.print("  Ville de l'entreprise: " + liste[i].occupation.entreprise.adresseEntreprise.getVille());
+                            System.out.print("  Province de l'entreprise: " + liste[i].occupation.entreprise.adresseEntreprise.getProvince());
+                            System.out.print("  Pays de l'entreprise: " + liste[i].occupation.entreprise.adresseEntreprise.getPays() + System.lineSeparator());
+                            for(j=0;j<10;j++){
+                                if(liste[i].numeroTelephone[j].getNumero() != null){
+                                    System.out.print("Numero de télephone: "+ (j+1)+ liste[i].numeroTelephone[j].getNumero());
+                                }
+                            }
+                        }
+                    }
                     break;
-                case 4:
+                case 4:choix=false;
                     break;
-                default:choix = true;
+                default:
                     break;
             }
         }
